@@ -14,54 +14,35 @@
             --border-color: #dddfe2;
             --main-blue: #0084ff;
         }
-
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
         body { background: var(--bg-color); color: var(--text-color); transition: 0.3s; height: 100vh; overflow: hidden; display: flex; flex-direction: column; }
-
-        /* Auth */
         #auth-container { position: fixed; width: 100%; height: 100%; background: #ffffff; z-index: 2000; display: flex; align-items: center; justify-content: center; }
-        .auth-card { background: var(--main-blue); padding: 40px 30px; border-radius: 20px; width: 90%; max-width: 380px; text-align: center; box-shadow: 0 10px 30px rgba(0,132,255,0.2); }
-        .auth-card input { width: 100%; padding: 15px; margin-bottom: 12px; border: none; border-radius: 10px; color: var(--main-blue); font-weight: bold; outline: none; }
+        .auth-card { background: var(--main-blue); padding: 40px 30px; border-radius: 20px; width: 90%; max-width: 380px; text-align: center; }
+        .auth-card input { width: 100%; padding: 15px; margin-bottom: 12px; border: none; border-radius: 10px; outline: none; }
         .auth-card button { width: 100%; padding: 15px; background: #1c1e21; color: white; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; }
-
-        /* Layout */
         #app-interface { height: 100%; width: 100%; display: none; flex-direction: column; }
         .header { padding: 12px 15px; background: var(--header-bg); border-bottom: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
         .header h2 { font-size: 24px; color: var(--main-blue); font-weight: 800; cursor: pointer; }
-
         .page-content { flex: 1; overflow-y: auto; overflow-x: hidden; }
         .hidden { display: none !important; }
-
-        /* Posts */
         .post-card { background: var(--card-bg); border-bottom: 8px solid var(--bg-color); padding: 15px; }
         .post-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; cursor: pointer; }
         .post-avatar { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; }
         .post-user { font-weight: bold; font-size: 15px; }
         .post-time { font-size: 11px; opacity: 0.6; }
         .post-content { font-size: 15px; line-height: 1.4; margin-bottom: 12px; word-wrap: break-word; white-space: pre-wrap; }
-        .post-actions { display: flex; justify-content: space-around; padding-top: 10px; border-top: 1px solid var(--border-color); color: #65676b; font-weight: 600; font-size: 14px; }
+        .post-actions { display: flex; justify-content: space-around; padding-top: 10px; border-top: 1px solid var(--border-color); color: #65676b; font-weight: 600; }
         .post-actions span { cursor: pointer; flex: 1; text-align: center; }
         .post-actions span.liked { color: var(--main-blue); }
-
-        /* Profile */
-        .profile-header { background: var(--card-bg); padding: 30px 15px; text-align: center; border-bottom: 1px solid var(--border-color); }
-        .profile-pic-container { position: relative; display: inline-block; margin-bottom: 15px; }
+        .profile-header { background: var(--card-bg); padding: 30px 15px; text-align: center; }
         .profile-pic-main { width: 120px; height: 120px; border-radius: 50%; border: 4px solid var(--main-blue); object-fit: cover; }
-        .profile-name { font-size: 22px; font-weight: bold; }
-        .btn-msg { margin-top: 15px; padding: 10px 25px; background: var(--main-blue); color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; }
-
-        /* Inbox */
-        #inbox-page { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-color); z-index: 1001; display: flex; flex-direction: column; }
+        #inbox-page, #users-page { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-color); z-index: 1001; display: flex; flex-direction: column; }
         #chat-box { flex: 1; overflow-y: auto; padding: 15px; display: flex; flex-direction: column; gap: 8px; }
-        .msg-input-bar { padding: 10px; background: var(--card-bg); border-top: 1px solid var(--border-color); display: flex; gap: 10px; align-items: center; }
-        .msg-input-bar input { flex: 1; background: var(--bg-color); border: none; border-radius: 20px; padding: 12px 15px; outline: none; }
-        
-        .bubble { max-width: 75%; padding: 10px 15px; border-radius: 18px; font-size: 14px; word-wrap: break-word; line-height: 1.4; }
+        .bubble { max-width: 75%; padding: 10px 15px; border-radius: 18px; font-size: 14px; }
         .bubble.sent { background: var(--main-blue); color: white; align-self: flex-end; border-bottom-right-radius: 2px; }
         .bubble.received { background: #e4e6eb; color: #000; align-self: flex-start; border-bottom-left-radius: 2px; }
-
-        /* User List */
-        #users-page { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-color); z-index: 1000; display: flex; flex-direction: column; }
+        .msg-input-bar { padding: 10px; background: var(--card-bg); border-top: 1px solid var(--border-color); display: flex; gap: 10px; }
+        .msg-input-bar input { flex: 1; background: var(--bg-color); border: none; border-radius: 20px; padding: 12px; outline: none; }
         .user-item { display: flex; align-items: center; gap: 12px; padding: 12px 15px; background: var(--card-bg); border-bottom: 1px solid var(--border-color); cursor: pointer; }
         .user-item img { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; }
     </style>
@@ -90,6 +71,7 @@
             <h2 onclick="showNewsfeed()">TCHAT</h2>
             <div style="display: flex; gap: 18px; align-items: center;">
                 <i class="fas fa-search" onclick="openUserList()" style="color:#65676b; font-size:18px; cursor:pointer;"></i>
+                <i class="fas fa-comment-dots" onclick="openUserList()" style="color:#65676b; font-size:18px; cursor:pointer;"></i>
                 <img id="myPicHeader" class="post-avatar" onclick="visitProfile(currentUser.id)" style="cursor:pointer;">
             </div>
         </div>
@@ -107,34 +89,34 @@
 
         <div id="profile-page" class="page-content hidden">
             <div class="profile-header">
-                <div class="profile-pic-container">
+                <div style="position: relative; display: inline-block;">
                     <img id="profPic" class="profile-pic-main">
                     <label id="uploadLabel" for="fileInput" style="position: absolute; bottom: 5px; right: 5px; background: #eee; padding: 8px; border-radius: 50%; cursor:pointer;"><i class="fas fa-camera"></i></label>
                     <input type="file" id="fileInput" hidden onchange="uploadPhoto(event)">
                 </div>
-                <div class="profile-name" id="profName">Name</div>
-                <button id="msg-btn-prof" class="btn-msg hidden">Message</button>
+                <div class="profile-name" id="profName" style="font-size:22px; font-weight:bold; margin-top:10px;">Name</div>
+                <button id="msg-btn-prof" class="btn-msg hidden" style="margin-top:10px; padding:8px 20px; background:var(--main-blue); color:white; border:none; border-radius:5px;">Message</button>
+                <div id="logout-btn" onclick="logout()" style="color:red; margin-top:15px; cursor:pointer;">Logout</div>
             </div>
             <div id="user-posts-container"></div>
-            <div id="logout-btn" onclick="logout()" style="padding:15px; color:red; text-align:center; background:white; cursor:pointer; margin-top:10px; border-top:1px solid #ddd;">Logout</div>
         </div>
     </div>
 
     <div id="users-page" class="hidden">
-        <div class="header"><i class="fas fa-arrow-left" onclick="closeUserList()"></i><h2 style="margin-left:15px; flex:1;">Search</h2></div>
+        <div class="header"><i class="fas fa-arrow-left" onclick="closeUserList()"></i><h2 style="margin-left:15px;">Messages</h2></div>
         <div id="users-list"></div>
     </div>
 
     <div id="inbox-page" class="hidden">
         <div class="header">
             <i class="fas fa-arrow-left" onclick="closeInbox()"></i>
-            <img id="chatPic" class="post-avatar" style="margin: 0 12px;">
+            <img id="chatPic" class="post-avatar" style="margin: 0 10px;">
             <h4 id="chatName" style="flex:1;"></h4>
         </div>
         <div id="chat-box"></div>
         <div class="msg-input-bar">
-            <input type="text" id="msgInput" placeholder="Aa">
-            <button onclick="sendMessage()" style="background:none; border:none; color:var(--main-blue); font-size:22px;"><i class="fas fa-paper-plane"></i></button>
+            <input type="text" id="msgInput" placeholder="Type a message...">
+            <button onclick="sendMessage()" style="background:none; border:none; color:var(--main-blue); font-size:20px;"><i class="fas fa-paper-plane"></i></button>
         </div>
     </div>
 
@@ -154,10 +136,8 @@
 
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
-
         window.currentUser = JSON.parse(localStorage.getItem('user')) || null;
-        let currentChatId = null;
-        let chatListener = null;
+        let chatListener = null, currentChatId = null;
         const defPic = "https://cdn-icons-png.flaticon.com/512/149/149071.png";
 
         window.toggleAuth = (r) => {
@@ -171,8 +151,7 @@
             const s = await get(ref(db, 'users'));
             let u = null;
             s.forEach(c => { if(c.val().emailPhone === e && c.val().password === p) u = c.val(); });
-            if(u) { localStorage.setItem('user', JSON.stringify(u)); location.reload(); }
-            else alert("Invalid!");
+            if(u) { localStorage.setItem('user', JSON.stringify(u)); location.reload(); } else alert("Invalid!");
         }
 
         window.register = async () => {
@@ -195,52 +174,25 @@
             document.getElementById('postText').value = "";
         }
 
-        window.visitProfile = async (uid) => {
-            const s = await get(ref(db, 'users/'+uid));
-            if(!s.exists()) return;
-            const u = s.val();
-            document.querySelectorAll('.page-content, #users-page').forEach(p => p.classList.add('hidden'));
-            document.getElementById('profile-page').classList.remove('hidden');
-            document.getElementById('profPic').src = u.profilePic || defPic;
-            document.getElementById('profName').innerText = u.username;
-            
-            const isMe = uid === currentUser.id;
-            document.getElementById('uploadLabel').style.display = isMe ? 'block' : 'none';
-            document.getElementById('logout-btn').style.display = isMe ? 'block' : 'none';
-            
-            const mb = document.getElementById('msg-btn-prof');
-            if(!isMe) {
-                mb.classList.remove('hidden');
-                mb.onclick = () => openInbox(u);
-            } else mb.classList.add('hidden');
-
-            const postCont = document.getElementById('user-posts-container');
-            onValue(ref(db, 'posts'), (snap) => {
-                postCont.innerHTML = "";
-                snap.forEach(c => { if(c.val().uid === uid) postCont.innerHTML = generatePostHTML(c.key, c.val()) + postCont.innerHTML; });
-            });
-        }
-
-        window.generatePostHTML = (id, p) => {
+        window.renderPost = (id, p, targetId) => {
+            const div = document.createElement('div');
+            div.className = 'post-card';
             const likes = p.likes ? Object.keys(p.likes).length : 0;
             const isLiked = p.likes && p.likes[currentUser.id];
-            // Security: Post text is escaped by creating an element
-            const tempDiv = document.createElement('div');
-            tempDiv.textContent = p.text;
-            const safeText = tempDiv.innerHTML;
-
-            return `
-            <div class="post-card">
+            
+            div.innerHTML = `
                 <div class="post-header" onclick="visitProfile('${p.uid}')">
                     <img src="${p.pic || defPic}" class="post-avatar">
-                    <div><div class="post-user">${p.name}</div><div class="post-time">${new Date(p.timestamp).toLocaleTimeString()}</div></div>
+                    <div><div class="post-user">${p.name}</div><div class="post-time">${new Date(p.timestamp).toLocaleString()}</div></div>
                 </div>
-                <div class="post-content">${safeText}</div>
+                <div class="post-content"></div>
                 <div class="post-actions">
                     <span class="${isLiked?'liked':''}" onclick="toggleLike('${id}')"><i class="fas fa-thumbs-up"></i> Like (${likes})</span>
-                    <span onclick="alert('Coming soon!')"><i class="fas fa-comment"></i> Comment</span>
-                </div>
-            </div>`;
+                    <span onclick="alert('Soon')"><i class="fas fa-comment"></i> Comment</span>
+                </div>`;
+            div.querySelector('.post-content').textContent = p.text; // Security fix
+            const target = document.getElementById(targetId);
+            target.insertBefore(div, target.firstChild);
         }
 
         window.toggleLike = async (pid) => {
@@ -249,8 +201,26 @@
             if(s.exists()) remove(r); else set(r, true);
         }
 
+        window.visitProfile = async (uid) => {
+            const s = await get(ref(db, 'users/'+uid));
+            if(!s.exists()) return;
+            const u = s.val();
+            document.querySelectorAll('.page-content, #users-page').forEach(p => p.classList.add('hidden'));
+            document.getElementById('profile-page').classList.remove('hidden');
+            document.getElementById('profPic').src = u.profilePic || defPic;
+            document.getElementById('profName').innerText = u.username;
+            document.getElementById('uploadLabel').style.display = (uid === currentUser.id) ? 'block' : 'none';
+            const mb = document.getElementById('msg-btn-prof');
+            if(uid !== currentUser.id) { mb.classList.remove('hidden'); mb.onclick = () => openInbox(u); } else mb.classList.add('hidden');
+            
+            onValue(ref(db, 'posts'), (snap) => {
+                document.getElementById('user-posts-container').innerHTML = "";
+                snap.forEach(c => { if(c.val().uid === uid) renderPost(c.key, c.val(), 'user-posts-container'); });
+            });
+        }
+
         window.showNewsfeed = () => {
-            document.querySelectorAll('.page-content').forEach(p => p.classList.add('hidden'));
+            document.querySelectorAll('.page-content, #users-page, #inbox-page').forEach(p => p.classList.add('hidden'));
             document.getElementById('newsfeed-page').classList.remove('hidden');
         }
 
@@ -259,39 +229,29 @@
 
         window.openInbox = (user) => {
             if(chatListener) off(ref(db, 'chats/'+currentChatId));
-            const box = document.getElementById('chat-box');
-            box.innerHTML = "";
-            
             document.getElementById('inbox-page').classList.remove('hidden');
             document.getElementById('chatName').innerText = user.username;
             document.getElementById('chatPic').src = user.profilePic || defPic;
-            
             const ids = [currentUser.id, user.id].sort();
             currentChatId = ids[0] + '_' + ids[1];
-            
             chatListener = onValue(ref(db, 'chats/'+currentChatId), (snap) => {
-                box.innerHTML = ""; 
+                const box = document.getElementById('chat-box');
+                box.innerHTML = "";
                 snap.forEach(c => {
-                    const m = c.val();
                     const bubble = document.createElement('div');
-                    bubble.className = `bubble ${m.sender===currentUser.id?'sent':'received'}`;
-                    bubble.textContent = m.text; // SECURITY FIX: code won't run
+                    bubble.className = `bubble ${c.val().sender===currentUser.id?'sent':'received'}`;
+                    bubble.textContent = c.val().text;
                     box.appendChild(bubble);
                 });
                 box.scrollTop = box.scrollHeight;
             });
         }
 
-        window.closeInbox = () => {
-            if(chatListener) off(ref(db, 'chats/'+currentChatId));
-            document.getElementById('inbox-page').classList.add('hidden');
-        }
-
+        window.closeInbox = () => { if(chatListener) off(ref(db, 'chats/'+currentChatId)); document.getElementById('inbox-page').classList.add('hidden'); }
         window.sendMessage = async () => {
             const i = document.getElementById('msgInput');
-            const val = i.value.trim();
-            if(!val || !currentChatId) return;
-            await push(ref(db, 'chats/'+currentChatId), { sender: currentUser.id, text: val, time: Date.now() });
+            if(!i.value.trim()) return;
+            await push(ref(db, 'chats/'+currentChatId), { sender: currentUser.id, text: i.value.trim() });
             i.value = "";
         }
 
@@ -313,9 +273,11 @@
             document.getElementById('myPicHeader').src = currentUser.profilePic || defPic;
             document.getElementById('postMyPic').src = currentUser.profilePic || defPic;
             
+            // FEED FIX: Listening for all posts
             onValue(ref(db, 'posts'), s => {
-                const f = document.getElementById('feed-container'); f.innerHTML = "";
-                s.forEach(c => f.innerHTML = generatePostHTML(c.key, c.val()) + f.innerHTML);
+                const f = document.getElementById('feed-container');
+                f.innerHTML = "";
+                s.forEach(c => renderPost(c.key, c.val(), 'feed-container'));
             });
 
             onValue(ref(db, 'users'), s => {
@@ -326,7 +288,7 @@
                         const d = document.createElement('div');
                         d.className = 'user-item';
                         d.innerHTML = `<img src="${u.profilePic || defPic}"><b>${u.username}</b>`;
-                        d.onclick = () => visitProfile(u.id);
+                        d.onclick = () => openInbox(u);
                         l.appendChild(d);
                     }
                 });
